@@ -1,0 +1,195 @@
+
+Begin optimization report for: SpmvVerifier(int, int, int *, int *, float *, float *, float *, float *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at verifier.cc(27,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(27,2)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(27,2)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 7 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 27.270 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(27,2)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(27,2)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(29,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(29,2)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(29,2)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 7 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 27.270 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(29,2)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(29,2)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(31,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(31,2)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(31,2)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 7 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 27.270 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(31,2)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(31,2)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(33,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(33,2)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(33,2)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 7 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 27.270 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(33,2)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(33,2)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(35,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(35,2)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(35,2)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 7 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 27.270 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(35,2)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(35,2)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(38,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(42,3)
+   <Peeled>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(42,3)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 13 
+      remark #15477: vector loop cost: 3.500 
+      remark #15478: estimated potential speedup: 5.900 
+      remark #15479: lightweight vector operations: 8 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(42,3)
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(42,3)
+   <Remainder>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(12,2) inlined into verifier.cc(55,24)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(12,2) inlined into verifier.cc(55,24)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 69 
+   remark #15477: vector loop cost: 4.250 
+   remark #15478: estimated potential speedup: 13.980 
+   remark #15479: lightweight vector operations: 36 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at verifier.cc(12,2) inlined into verifier.cc(55,24)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================

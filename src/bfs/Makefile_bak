@@ -1,0 +1,28 @@
+include ../common.mk
+INCLUDES+=-I $(CUB_DIR)
+ICPCFLAGS+=-std=c++98
+#CXXFLAGS+=-std=c++98
+B40C_INC=-I $(B40_DIR) -I $(B40_DIR)/test
+SRC=main.cc
+OBJS= topo_base.o linear_base.o topo_vector.o linear_vector.o topo_lb.o linear_lb.o bottom_up.o hybrid_base.o hybrid_lb.o main.o verifier.o omp_base.o omp_beamer.o omp_topo.o mic_base.o
+
+
+#%.o: %.cc
+#	$(ICC) -O3 $(INCLUDES) -L/opt/intel/opencl-1.2-6.4.0.25/lib64 -L/opt/intel/composer_xe_2015.1.133/compiler/lib/mic/ -c $<
+
+#%.o: %.cc
+#	$(ICC) -mmic -c $<
+
+#bfs_mic_base: mic_base.o main.o verifier.o
+#	$(ICC) -mmic main.o mic_base.o verifier.o -o $@
+#	mv $@ $(BIN)
+
+#bfs_mic_base: mic_base.o main.o verifier.o
+#	$(ICC) -O3 $(INCLUDES) -L/opt/intel/opencl-1.2-6.4.0.25/lib64 -L/opt/intel/composer_xe_2015.1.133/compiler/lib/mic/ -o $@ -lOpenCL
+#	mv $@ $(BIN)
+
+	$(ICC) -O3 main.cc mic_base.cc verifier.cc $(INCLUDES) -L/opt/intel/opencl-1.2-6.4.0.25/lib64 -L/opt/intel/composer_xe_2015.1.133/compiler/lib/mic/ -lOpenCL -oocl_sample.out
+
+
+clean:
+	rm *.o

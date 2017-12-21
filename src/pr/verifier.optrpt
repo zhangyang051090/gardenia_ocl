@@ -1,0 +1,177 @@
+
+Begin optimization report for: PRVerifier(int, int *, int *, int *, int *, int *, ScoreT *, double)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at verifier.cc(15,2)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(15,2)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 5 
+   remark #15477: vector loop cost: 0.370 
+   remark #15478: estimated potential speedup: 19.480 
+   remark #15479: lightweight vector operations: 3 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at verifier.cc(15,2)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(22,3)
+<Peeled, Multiversioned v1>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(22,3)
+<Multiversioned v1>
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15450: unmasked unaligned unit stride loads: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 37 
+   remark #15477: vector loop cost: 4.750 
+   remark #15478: estimated potential speedup: 12.900 
+   remark #15479: lightweight vector operations: 6 
+   remark #15487: type converts: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at verifier.cc(22,3)
+<Multiversioned v1>
+LOOP END
+
+LOOP BEGIN at verifier.cc(22,3)
+<Remainder, Multiversioned v1>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(22,3)
+<Multiversioned v2>
+   remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+LOOP END
+
+LOOP BEGIN at verifier.cc(24,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at verifier.cc(28,4)
+   <Peeled>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(28,4)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 9 
+      remark #15477: vector loop cost: 13.000 
+      remark #15478: estimated potential speedup: 4.400 
+      remark #15479: lightweight vector operations: 6 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at verifier.cc(28,4)
+   <Remainder>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(51,2)
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+LOOP END
+
+LOOP BEGIN at verifier.cc(53,2)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at verifier.cc(57,3)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+      remark #15346: vector dependence: assumed FLOW dependence between incomming_sums line 59 and incomming_sums line 59
+   LOOP END
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Peeled, Distributed chunk1>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Distributed chunk1>
+   remark #15301: PARTIAL LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 20 
+   remark #15477: vector loop cost: 2.500 
+   remark #15478: estimated potential speedup: 12.340 
+   remark #15479: lightweight vector operations: 13 
+   remark #15487: type converts: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Distributed chunk1>
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Remainder, Distributed chunk1>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Peeled, Distributed chunk2>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Distributed chunk2>
+   remark #15301: PARTIAL LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 5 
+   remark #15477: vector loop cost: 0.370 
+   remark #15478: estimated potential speedup: 19.730 
+   remark #15479: lightweight vector operations: 3 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at verifier.cc(62,2)
+<Remainder, Distributed chunk2>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at verifier.cc(20,2)
+   remark #15532: loop was not vectorized: compile time constraints prevent loop optimization. Consider using -O3.
+LOOP END
+===========================================================================
+
+Begin optimization report for: std::vector<ScoreT, std::allocator<ScoreT>>::vector(std::vector<ScoreT, std::allocator<ScoreT>> *, std::vector<ScoreT, std::allocator<ScoreT>>::size_type, const std::vector<ScoreT, std::allocator<ScoreT>>::value_type &, const std::vector<ScoreT, std::allocator<ScoreT>>::allocator_type &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(743,7) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(267,9)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(743,7) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(267,9)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 3 
+   remark #15477: vector loop cost: 0.370 
+   remark #15478: estimated potential speedup: 11.680 
+   remark #15479: lightweight vector operations: 3 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(743,7) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(267,9)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================

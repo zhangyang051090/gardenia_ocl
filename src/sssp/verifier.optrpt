@@ -1,0 +1,178 @@
+
+Begin optimization report for: SSSPVerifier(int, int, int *, int *, DistT *, DistT *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(432,46) inlined into verifier.cc(12,47)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(302,7) inlined into verifier.cc(12,47)
+      remark #15523: loop was not vectorized: cannot compute loop iteration count before executing the loop.
+   LOOP END
+
+   LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(182,7) inlined into verifier.cc(12,47)
+      remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+   LOOP END
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(182,7) inlined into verifier.cc(17,5)
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(302,7) inlined into verifier.cc(21,6)
+   remark #15523: loop was not vectorized: cannot compute loop iteration count before executing the loop.
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(182,7) inlined into verifier.cc(21,6)
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_heap.h(182,7) inlined into verifier.cc(30,9)
+   remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+LOOP END
+
+LOOP BEGIN at verifier.cc(42,2)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at verifier.cc(42,2)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 23 
+   remark #15477: vector loop cost: 0.560 
+   remark #15478: estimated potential speedup: 33.330 
+   remark #15479: lightweight vector operations: 9 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at verifier.cc(42,2)
+LOOP END
+
+LOOP BEGIN at verifier.cc(42,2)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at verifier.cc(18,2)
+   remark #15536: loop was not vectorized: inner loop throttling prevents vectorization of this outer loop. Refer to inner loop message for more details.
+
+   LOOP BEGIN at verifier.cc(25,4)
+      remark #15532: loop was not vectorized: compile time constraints prevent loop optimization. Consider using -O3.
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>>::_M_insert_aux(std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>> *, std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>>::iterator, const std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>>::value_type &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(530,4) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/vector.tcc(311,4)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15460: masked strided loads: 2 
+   remark #15462: unmasked indexed (or gather) loads: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 5 
+   remark #15477: vector loop cost: 2.120 
+   remark #15478: estimated potential speedup: 2.200 
+   remark #15479: lightweight vector operations: 5 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(530,4) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/vector.tcc(311,4)
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(530,4) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/vector.tcc(311,4)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_uninitialized.h(76,8) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/vector.tcc(342,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed FLOW dependence between __first_8935 line 84 and __first_8935 line 84
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_uninitialized.h(76,8) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/vector.tcc(348,3)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15452: unmasked strided loads: 2 
+   remark #15453: unmasked strided stores: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 23 
+   remark #15477: vector loop cost: 3.180 
+   remark #15478: estimated potential speedup: 6.740 
+   remark #15479: lightweight vector operations: 18 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_uninitialized.h(76,8) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/vector.tcc(348,3)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================
+
+Begin optimization report for: std::vector<DistT, std::allocator<DistT>>::vector(std::vector<DistT, std::allocator<DistT>> *, std::vector<DistT, std::allocator<DistT>>::size_type, const std::vector<DistT, std::allocator<DistT>>::value_type &, const std::vector<DistT, std::allocator<DistT>>::allocator_type &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(743,7) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(267,9)
+<Peeled>
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(743,7) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(267,9)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 2 
+   remark #15477: vector loop cost: 0.180 
+   remark #15478: estimated potential speedup: 8.100 
+   remark #15479: lightweight vector operations: 3 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_algobase.h(743,7) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(267,9)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================
+
+Begin optimization report for: std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>>::vector(std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>> *, const std::vector<std::pair<DistT, int>, std::allocator<std::pair<DistT, int>>> &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_uninitialized.h(76,23) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(282,4)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15452: unmasked strided loads: 2 
+   remark #15453: unmasked strided stores: 2 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 23 
+   remark #15477: vector loop cost: 3.180 
+   remark #15478: estimated potential speedup: 6.740 
+   remark #15479: lightweight vector operations: 18 
+   remark #15481: heavy-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_uninitialized.h(76,23) inlined into /usr/linux-k1om-4.7/linux-k1om/../x86_64-k1om-linux/include/c++/4.7.0/bits/stl_vector.h(282,4)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================
+
+Begin optimization report for: write_solution(const char *, int, DistT *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at verifier.cc(57,2)
+   remark #15527: loop was not vectorized: function call to fprintf(FILE *, const char *, ...) cannot be vectorized   [ verifier.cc(58,3) ]
+LOOP END
+===========================================================================

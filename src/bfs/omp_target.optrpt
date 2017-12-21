@@ -1,0 +1,373 @@
+
+Begin optimization report for: BUStep(int, int *, int *, int *, Bitmap &, Bitmap &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at ../../include/bitmap.h(36,2) inlined into omp_target.cpp(16,7)
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(19,2)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at omp_target.cpp(23,4)
+      remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+   LOOP END
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at omp_target.cpp(19,2)
+   remark #15543: loop was not vectorized: loop with function call not considered an optimization candidate.   [ omp_target.cpp(18,2) ]
+LOOP END
+===========================================================================
+
+Begin optimization report for: TDStep(int, int *, int *, int *, SlidingQueue<int> &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at omp_target.cpp(44,69)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at omp_target.cpp(48,4)
+      remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(53,14)
+         remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+         LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(53,14)
+         <Multiversioned v2>
+            remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+         LOOP END
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(59,10)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(59,10)
+   <Multiversioned v2>
+      remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: QueueToBitmap(const SlidingQueue<int> &, Bitmap &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at omp_target.cpp(67,68)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at omp_target.cpp(69,6)
+      remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: BitmapToQueue(int, const Bitmap &, SlidingQueue<int> &)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at omp_target.cpp(79,3)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(81,12)
+      remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(81,12)
+      <Multiversioned v2>
+         remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(82,10)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(82,10)
+   <Multiversioned v2>
+      remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: BFSSolver(int, int, int, int *, int *, int *, int *, int *, DistT *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at ../../include/omp_target_config.h(10,2) inlined into omp_target.cpp(101,2)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15451: unmasked unaligned unit stride stores: 3 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 3.370 
+   remark #15478: estimated potential speedup: 1.830 
+   remark #15479: lightweight vector operations: 8 
+   remark #15480: medium-overhead vector operations: 1 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../include/bitmap.h(36,2) inlined into omp_target.cpp(114,7)
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+LOOP END
+
+LOOP BEGIN at ../../include/bitmap.h(36,2) inlined into omp_target.cpp(116,8)
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+LOOP END
+
+LOOP BEGIN at ../../include/bitmap.h(36,2) inlined into omp_target.cpp(130,19)
+   remark #15398: loop was not vectorized: loop was transformed to memset or memcpy
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(150,2)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(150,2)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 27 
+   remark #15477: vector loop cost: 1.000 
+   remark #15478: estimated potential speedup: 23.140 
+   remark #15479: lightweight vector operations: 15 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(150,2)
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(150,2)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2) inlined into omp_target.cpp(99,15)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2) inlined into omp_target.cpp(99,15)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 27 
+   remark #15477: vector loop cost: 1.120 
+   remark #15478: estimated potential speedup: 20.660 
+   remark #15479: lightweight vector operations: 17 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2) inlined into omp_target.cpp(99,15)
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2) inlined into omp_target.cpp(99,15)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at ../../include/omp_target_config.h(13,2) inlined into omp_target.cpp(101,2)
+   remark #15335: loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+   remark #15456: masked unaligned unit stride loads: 2 
+   remark #15457: masked unaligned unit stride stores: 1 
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 11 
+   remark #15477: vector loop cost: 2.000 
+   remark #15478: estimated potential speedup: 0.270 
+   remark #15479: lightweight vector operations: 13 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(44,69) inlined into omp_target.cpp(139,18)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at omp_target.cpp(48,4) inlined into omp_target.cpp(139,18)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+         <Peeled, Multiversioned v2>
+            remark #15301: PEEL LOOP WAS VECTORIZED
+         LOOP END
+
+         LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+         <Multiversioned v2>
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15475: --- begin vector loop cost summary ---
+            remark #15476: scalar loop cost: 3 
+            remark #15477: vector loop cost: 0.180 
+            remark #15478: estimated potential speedup: 11.680 
+            remark #15479: lightweight vector operations: 3 
+            remark #15488: --- end vector loop cost summary ---
+         LOOP END
+
+         LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+         <Multiversioned v2>
+         LOOP END
+
+         LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+         <Remainder, Multiversioned v2>
+         LOOP END
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 3 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 11.680 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(139,18)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(67,68) inlined into omp_target.cpp(124,4)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at omp_target.cpp(69,6) inlined into omp_target.cpp(124,4)
+      remark #15521: loop was not vectorized: explicitly compute the iteration count before executing the loop or try using canonical loop form
+   LOOP END
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(19,2) inlined into omp_target.cpp(130,19)
+   remark #15541: outer loop was not auto-vectorized: consider using SIMD directive
+
+   LOOP BEGIN at omp_target.cpp(23,4) inlined into omp_target.cpp(130,19)
+      remark #15520: loop was not vectorized: loop with early exits cannot be vectorized unless it meets search loop idiom criteria
+   LOOP END
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(79,3) inlined into omp_target.cpp(134,4)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+      <Peeled, Multiversioned v2>
+         remark #15301: PEEL LOOP WAS VECTORIZED
+      LOOP END
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+      <Multiversioned v2>
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15475: --- begin vector loop cost summary ---
+         remark #15476: scalar loop cost: 3 
+         remark #15477: vector loop cost: 0.180 
+         remark #15478: estimated potential speedup: 11.680 
+         remark #15479: lightweight vector operations: 3 
+         remark #15488: --- end vector loop cost summary ---
+      LOOP END
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+      <Multiversioned v2>
+      LOOP END
+
+      LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+      <Remainder, Multiversioned v2>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+   <Peeled, Multiversioned v2>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+   <Multiversioned v2>
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 3 
+      remark #15477: vector loop cost: 0.180 
+      remark #15478: estimated potential speedup: 11.680 
+      remark #15479: lightweight vector operations: 3 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+   <Multiversioned v2>
+   LOOP END
+
+   LOOP BEGIN at ../../include/sliding_queue.h(107,2) inlined into omp_target.cpp(134,4)
+   <Remainder, Multiversioned v2>
+   LOOP END
+LOOP END
+
+
+Non-optimizable loops:
+
+
+LOOP BEGIN at omp_target.cpp(121,2)
+   remark #15543: loop was not vectorized: loop with function call not considered an optimization candidate.   [ omp_target.cpp(40,2) ]
+
+   LOOP BEGIN at omp_target.cpp(132,29)
+      remark #15543: loop was not vectorized: loop with function call not considered an optimization candidate.   [ omp_target.cpp(18,2) ]
+   LOOP END
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(19,2) inlined into omp_target.cpp(130,19)
+   remark #15543: loop was not vectorized: loop with function call not considered an optimization candidate.   [ omp_target.cpp(18,2) ]
+LOOP END
+===========================================================================
+
+Begin optimization report for: InitDepth(int, int *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at omp_target.cpp(91,2)
+<Peeled>
+   remark #15301: PEEL LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 27 
+   remark #15477: vector loop cost: 1.120 
+   remark #15478: estimated potential speedup: 20.660 
+   remark #15479: lightweight vector operations: 17 
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2)
+LOOP END
+
+LOOP BEGIN at omp_target.cpp(91,2)
+<Remainder>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+===========================================================================

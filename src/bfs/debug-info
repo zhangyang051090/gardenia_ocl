@@ -1,0 +1,8 @@
+1: must use atomicCAS, otherwise the items will not be stable and not correct. the reason is not sure now. The
+reason is the atomic operation's effects.
+2:road_central has large diameter, its iteration number is large (as large as 3827). This is maybe one of the reasons
+it takes much long time. The solution may be to use a shared software worklist to replace
+the frequent array copy between host and device.
+3:globalSize can be changed, but the localSize cannot be changed. We use device exchange (contents exchange, not pointer)
+between in_frontier and out_frontier. And use variable globalSize to improve performance.
+4:bfs_kernel should use varied globalSize and we also use copy buffer to exchange device arrays.

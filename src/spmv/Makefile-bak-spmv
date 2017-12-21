@@ -1,0 +1,16 @@
+include ../common.mk
+CXXFLAGS+=-std=c++11
+#INCLUDES+=-I $(CUB_DIR)
+OBJS= ocl_base.o main.o verifier.o
+
+all: $(OBJS) spmv-ocl
+
+%.o: %.cc
+	$(CC) -O3 -Wall $(PARFLAG) $(INCLUDES) -c $<
+
+spmv_ocl: ocl_base.o main.o verifier.o
+	$(CC) -O3 -Wall $(INCLUDES) main.o ocl_base.o verifier.o -o -lm $@ -lOpenCL
+	#mv $@ $(BIN)
+
+clean:
+	rm *.o

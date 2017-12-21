@@ -1,0 +1,4 @@
+1: the serial version fails to handle the d_scores overflow in max_element (d_scores has m elements, while it is expanded to be 2^n)
+2: all arguments such as m, _len should be updated to GPU, when it is changed in CPU
+3: the par version will likely change the values of d_scores in max_element
+4: if we reduce the globalSize in bc_forward and not restore its value to the initial one, it will influence correctness in program.

@@ -1,0 +1,1 @@
+1: performance increases greatly with varied thread num, in long-tail road-central. For other programs, performance's increase is not obvious or the performance will even decrease.

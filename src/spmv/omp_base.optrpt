@@ -1,0 +1,34 @@
+
+Begin optimization report for: SpmvSolver(int, int, int *, int *, float *, float *, float *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at omp_base.cc(18,2)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at omp_base.cc(23,3)
+   <Peeled>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at omp_base.cc(23,3)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15458: masked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector loop cost summary ---
+      remark #15476: scalar loop cost: 13 
+      remark #15477: vector loop cost: 3.500 
+      remark #15478: estimated potential speedup: 5.900 
+      remark #15479: lightweight vector operations: 8 
+      remark #15488: --- end vector loop cost summary ---
+   LOOP END
+
+   LOOP BEGIN at omp_base.cc(23,3)
+   LOOP END
+
+   LOOP BEGIN at omp_base.cc(23,3)
+   <Remainder>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+LOOP END
+===========================================================================

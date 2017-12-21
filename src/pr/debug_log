@@ -1,0 +1,3 @@
+1: atomic add in opencl does't support float add, use atomic_cmpxchg to achieve the float add.
+2: implement the function of float atomic add takes long time 30s.
+3: barrier(CLK_GLOBAL_MEM_FENCE) can only synchronize between the same work group, can not between defferent groups.
