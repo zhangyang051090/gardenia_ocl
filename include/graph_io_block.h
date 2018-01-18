@@ -116,8 +116,12 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 	}
 	
 	//zy second version, not test yet
-	vector<int> block_column;
-	for(int i = 0; i < num_rows; i ++){
+	int num_block[num_rows/height];
+	vector<aaa> block_column[num_rows/height];
+	vector<aaa> block_all;
+	int num_block_all;
+	block_all = 0;
+	for(int i = 0; i < num_rows/height; i ++){
 		num_block[i] = row_offsets[i+height] - row_offsets[i]
 		for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
 			block_column[i].push_back(column[offset]/width);
@@ -125,6 +129,26 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 				if(column[offset] == column[offset_1]){
 					block_column[i].erase(column[offset]/width);
 					num_block[i]--;
+				}
+			}
+		}
+		num_block_all += num_block[i];
+		block_all.push_back(block_column[i]);
+	}
+
+	int value[num_block_all][height*weight]={0};
+	for(int j = 0; j < num_block_all; j ++){
+		for(int i = 0; i < num_rows/height; i ++){
+			for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
+				if(column[offset] == 2*block_all[j].block_col){
+					if((column[offset]%2 == 0) && (offset < row_offsets[i+1]))
+						value[j][0] = Ax[offset];
+					else if((column[offset]%2 == 0) && (offset > row_offsets[i+1]))
+						value[j][2] = Ax[offset];
+					else if((column[offset]%2 == 1) && (offset < row_offsets[i+1]))
+						value[j][1] = Ax[offset];
+					else if((column[offset]%2 == 1) && (offset > row_offsets[i+1]))
+						value[j][3] = Ax[offset];
 				}
 			}
 		}
