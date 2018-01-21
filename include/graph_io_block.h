@@ -16,9 +16,14 @@ struct Edge {
 	WeightT wt;
 };
 
+//struct Block {
+//	int block_col;
+//	int block_row;
+//};
+
 bool compare_id(Edge a, Edge b) { return (a.dst < b.dst); }
 
-void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, WeightT *&weight, vector<vector<Edge> > vertices, bool symmetrize, bool sorted, bool remove_selfloops, bool remove_redundents) {
+void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, WeightT *&weight, vector<vector<Edge> > vertices, vector<int> block, vector<int> block_row, int num_block_all, bool symmetrize, bool sorted, bool remove_selfloops, bool remove_redundents) {
 	//sort the neighbor list
 	if(sorted) {
 		printf("Sorting the neighbor lists...");
@@ -116,43 +121,53 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 	}
 	
 	//zy second version, not test yet
+	int height=2;
+	int width=2;
+	int num_rows = m;
 	int num_block[num_rows/height];
-	vector<aaa> block_column[num_rows/height];
-	vector<aaa> block_all;
+	vector<int> block_column[num_rows/height];
+	//vector<int> block;
+	//vector<int> block_row;
+	//vector<Block> block_all;
 	int num_block_all;
-	block_all = 0;
+	num_block_all = 0;
 	for(int i = 0; i < num_rows/height; i ++){
-		num_block[i] = row_offsets[i+height] - row_offsets[i]
+		num_block[i] = row_offsets[i+height] - row_offsets[i];
 		for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
 			block_column[i].push_back(column[offset]/width);
 			for(int offset_1 = row_offsets[i]; offset_1 < offset; offset_1++){		
-				if(column[offset] == column[offset_1]){
-					block_column[i].erase(column[offset]/width);
+				if((column[offset]/width) == (column[offset_1]/width)){
+					block_column[i].pop_back();
 					num_block[i]--;
 				}
 			}
 		}
 		num_block_all += num_block[i];
-		block_all.push_back(block_column[i]);
+		
+		block.insert(block.end(), block_column[i].begin(), block_column[i].end());		
+		if(block.size() != num_block_all)printf("Error wrong block num");
+
+		//block_all[i].block_col = block_column[i];
+		if(num_block[i] != 0){
+			for(int j = 0; j < num_block[i]; j ++)
+				block_row.push_back(i);
+		}
+
+		//	block_all[i].block_row = i;
+
+
+		//Block tmp;
+		//tmp.block_col = block_column[i].block_col;
+		//tmp.block_row = i;		
+		
+		//block_all.insert(block_all.end, );
+		//block_all[i].block_col = block_column[i].block_col;
+		//block_all.block_row.push_back(i);
+		
+		//block_all.push_back(tmp);
 	}
 
-	int value[num_block_all][height*weight]={0};
-	for(int j = 0; j < num_block_all; j ++){
-		for(int i = 0; i < num_rows/height; i ++){
-			for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
-				if(column[offset] == 2*block_all[j].block_col){
-					if((column[offset]%2 == 0) && (offset < row_offsets[i+1]))
-						value[j][0] = Ax[offset];
-					else if((column[offset]%2 == 0) && (offset > row_offsets[i+1]))
-						value[j][2] = Ax[offset];
-					else if((column[offset]%2 == 1) && (offset < row_offsets[i+1]))
-						value[j][1] = Ax[offset];
-					else if((column[offset]%2 == 1) && (offset > row_offsets[i+1]))
-						value[j][3] = Ax[offset];
-				}
-			}
-		}
-	}
+
 
 	//zy fist version, not efficient, not test right or wrong
 /*	vector<int> row_offsets_block;
