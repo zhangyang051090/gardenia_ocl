@@ -1,7 +1,7 @@
 // Copyright 2016, National University of Defense Technology
 // Authors: Xuhao Chen <cxh@illinois.edu>
 #include "spmv.h"
-#include "graph_io.h"
+#include "graph_io_block.h"
 
 int main(int argc, char *argv[]) {
 	printf("Sparse Matrix-Vector Multiplication by Xuhao Chen\n");
@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 
 	int m, n, nnz, *h_row_offsets = NULL, *h_column_indices = NULL, *h_degree = NULL;
 	ValueType *h_weight = NULL;
-	vector<int> block, vector<int> block_row, int num_block_all;
-	read_graph(argc, argv, m, n, nnz, h_row_offsets, h_column_indices, h_degree, h_weight, symmetrize, block, block_row, num_block_all, false, true, false, true);
+	vector<int> block, vector<int> block_row, vector<int> row_start, int num_block_all;
+	read_graph(argc, argv, m, n, nnz, h_row_offsets, h_column_indices, h_degree, h_weight, symmetrize, block, block_row, row_start, num_block_all, false, true, false, true);
 
 	int num_rows = m;
 	int num_cols = m;
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 	for(int j = 0; j < num_block_all; j ++){
 		for(int i = 0; i < num_rows/height; i ++){
 			for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
-				if((column[offset] == 2*block[j]) && (block_row[j] == i)){
+				if((column[offset]/2 == block[j]) && (block_row[j] == i)){
 					if((column[offset]%2 == 0) && (offset < row_offsets[i+1]))
 						value[j][0] = h_weight[offset];
 					else if((column[offset]%2 == 0) && (offset > row_offsets[i+1]))
@@ -57,13 +57,19 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-
-
+	for(int j = 0; j < num_block_all; j ++){
+		h_block[j] = block.end();
+		block.pop_back();
+	}
+	for(int j = 0; j < num_rows / 2; j ++){
+		h_row_start[j] = row_start.end();
+		row_start.pop_back();
+	}
 
 //	for(int i = 0; i < 100; i++)
 //		printf("%f ", y_host[i]);
 
-	SpmvSolver(m, nnz, h_row_offsets, h_column_indices, h_weight, h_x, h_y, value, block, block_row);
+	SpmvSolver(m, nnz, h_row_offsets, h_column_indices, h_weight, h_x, h_y, value, h_block, h_row_start, num_block_all);
 	SpmvVerifier(m, nnz, h_row_offsets, h_column_indices, h_weight, h_x, y_host, h_y);
 	
 	free(h_row_offsets);

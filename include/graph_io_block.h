@@ -23,7 +23,11 @@ struct Edge {
 
 bool compare_id(Edge a, Edge b) { return (a.dst < b.dst); }
 
-void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, WeightT *&weight, vector<vector<Edge> > vertices, vector<int> block, vector<int> block_row, int num_block_all, bool symmetrize, bool sorted, bool remove_selfloops, bool remove_redundents) {
+void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, WeightT *&weight, vector<vector<Edge> > vertices, vector<int> block, vector<int> block_row, vector<int> row_start, int num_block_all, bool symmetrize, bool sorted, bool remove_selfloops, bool remove_redundents) {
+
+	int height=2;
+	int width=2;
+
 	//sort the neighbor list
 	if(sorted) {
 		printf("Sorting the neighbor lists...");
@@ -74,7 +78,7 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 		cout << endl;
 	}
 */
-	row_offsets = (int *)malloc((m + 1) * sizeof(int));
+	row_offsets = (int *)malloc((m + height) * sizeof(int));
 	int count = 0;
 	for (int i = 0; i < m; i++) {
 		row_offsets[i] = count;
@@ -121,16 +125,15 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 	}
 	
 	//zy second version, not test yet
-	int height=2;
-	int width=2;
 	int num_rows = m;
 	int num_block[num_rows/height];
 	vector<int> block_column[num_rows/height];
 	//vector<int> block;
 	//vector<int> block_row;
 	//vector<Block> block_all;
-	int num_block_all;
+	//int num_block_all;
 	num_block_all = 0;
+	row_start.push_back(num_block_all);
 	for(int i = 0; i < num_rows/height; i ++){
 		num_block[i] = row_offsets[i+height] - row_offsets[i];
 		for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
@@ -145,7 +148,7 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 		num_block_all += num_block[i];
 		
 		block.insert(block.end(), block_column[i].begin(), block_column[i].end());		
-		if(block.size() != num_block_all)printf("Error wrong block num");
+		if(block.size() != num_block_all)printf("Error wrong block num\n");
 
 		//block_all[i].block_col = block_column[i];
 		if(num_block[i] != 0){
@@ -153,6 +156,10 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 				block_row.push_back(i);
 		}
 
+		for(int j = 0; j < num_block[i]; j ++)
+			row_start.push_back(num_block_all);
+
+		if(block.size() != block_row.size())printf("Error wrong block row size\n");
 		//	block_all[i].block_row = i;
 
 
@@ -426,7 +433,7 @@ void graph2csr(char *graph, int &m, int &nnz, int *&row_offsets, int *&column_in
 }
 
 // transfer mtx graph to CSR format
-void mtx2csr(char *mtx, int &m, int &n, int &nnz, int *&row_offsets, int *&column_indices, WeightT *&weight, bool symmetrize, bool transpose, bool sorted, bool remove_selfloops, bool remove_redundents) {
+void mtx2csr(char *mtx, int &m, int &n, int &nnz, int *&row_offsets, int *&column_indices, WeightT *&weight, vector<int> block, vector<int> block_row, vector<int> row_start, int num_block_all, bool symmetrize, bool transpose, bool sorted, bool remove_selfloops, bool remove_redundents) {
 	printf("Reading (.mtx) input file %s\n", mtx);
 	std::ifstream cfile;
 	cfile.open(mtx);
@@ -470,7 +477,7 @@ void mtx2csr(char *mtx, int &m, int &n, int &nnz, int *&row_offsets, int *&colum
 		}
 	}
 	cfile.close();
-	fill_data(m, nnz, row_offsets, column_indices, weight, vertices, symmetrize, sorted, remove_selfloops, remove_redundents);
+	fill_data_block(m, nnz, row_offsets, column_indices, weight, vertices, block, block_row, row_start, num_block_all, symmetrize, sorted, remove_selfloops, remove_redundents);
 }
 /*
 void sort_neighbors(int m, int *row_offsets, int *&column_indices) {
@@ -490,10 +497,10 @@ void sort_neighbors(int m, int *row_offsets, int *&column_indices) {
 	}	
 }
 */
-void read_graph(int argc, char *argv[], int &m, int &n, int &nnz, int *&row_offsets, int *&column_indices, int *&degree, WeightT *&weight, bool is_symmetrize=false, bool is_transpose=false, bool sorted=true, bool remove_selfloops=true, bool remove_redundents=true) {
+void read_graph(int argc, char *argv[], int &m, int &n, int &nnz, int *&row_offsets, int *&column_indices, int *&degree, WeightT *&weight, vector<int> block, vector<int> block_row, vector<int> row_start, int num_block_all, bool is_symmetrize=false, bool is_transpose=false, bool sorted=true, bool remove_selfloops=true, bool remove_redundents=true) {
 	//if(is_symmetrize) printf("Requiring symmetric graphs for this algorithm\n");
 	if (strstr(argv[1], ".mtx"))
-		mtx2csr(argv[1], m, n, nnz, row_offsets, column_indices, weight, is_symmetrize, is_transpose, sorted, remove_selfloops, remove_redundents);
+		mtx2csr(argv[1], m, n, nnz, row_offsets, column_indices, weight, block, block_row, row_start, num_block_all, is_symmetrize, is_transpose, sorted, remove_selfloops, remove_redundents);
 	else if (strstr(argv[1], ".graph"))
 		graph2csr(argv[1], m, nnz, row_offsets, column_indices, weight, is_symmetrize, is_transpose, sorted, remove_selfloops, remove_redundents);
 	else if (strstr(argv[1], ".gr"))
