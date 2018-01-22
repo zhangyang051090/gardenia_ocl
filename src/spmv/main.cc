@@ -19,8 +19,11 @@ int main(int argc, char *argv[]) {
 
 	int m, n, nnz, *h_row_offsets = NULL, *h_column_indices = NULL, *h_degree = NULL;
 	ValueType *h_weight = NULL;
-	vector<int> block, vector<int> block_row, vector<int> row_start, int num_block_all;
-	read_graph(argc, argv, m, n, nnz, h_row_offsets, h_column_indices, h_degree, h_weight, symmetrize, block, block_row, row_start, num_block_all, false, true, false, true);
+	vector<int>block;
+	vector<int>block_row;
+	vector<int>row_start;
+	int num_block_all;
+	read_graph(argc, argv, m, n, nnz, h_row_offsets, h_column_indices, h_degree, h_weight, block, block_row, row_start, num_block_all, symmetrize, false, true, false, true);
 
 	int num_rows = m;
 	int num_cols = m;
@@ -38,19 +41,19 @@ int main(int argc, char *argv[]) {
 
 	int height=2;
 	int width=2;
-	int value[num_block_all][height*weight]={0};
+	int value[num_block_all][height*width]={0};
 
 	for(int j = 0; j < num_block_all; j ++){
 		for(int i = 0; i < num_rows/height; i ++){
-			for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
-				if((column[offset]/2 == block[j]) && (block_row[j] == i)){
-					if((column[offset]%2 == 0) && (offset < row_offsets[i+1]))
+			for(int offset = h_row_offsets[i]; offset < h_row_offsets[i+height]; offset ++){
+				if((h_column_indices[offset]/2 == block[j]) && (block_row[j] == i)){
+					if((h_column_indices[offset]%2 == 0) && (offset < h_row_offsets[i+1]))
 						value[j][0] = h_weight[offset];
-					else if((column[offset]%2 == 0) && (offset > row_offsets[i+1]))
+					else if((h_column_indices[offset]%2 == 0) && (offset > h_row_offsets[i+1]))
 						value[j][2] = h_weight[offset];
-					else if((column[offset]%2 == 1) && (offset < row_offsets[i+1]))
+					else if((h_column_indices[offset]%2 == 1) && (offset < h_row_offsets[i+1]))
 						value[j][1] = h_weight[offset];
-					else if((column[offset]%2 == 1) && (offset > row_offsets[i+1]))
+					else if((h_column_indices[offset]%2 == 1) && (offset > h_row_offsets[i+1]))
 						value[j][3] = h_weight[offset];
 				}
 			}

@@ -137,9 +137,9 @@ void fill_data_block(int m, int &nnz, int *&row_offsets, int *&column_indices, W
 	for(int i = 0; i < num_rows/height; i ++){
 		num_block[i] = row_offsets[i+height] - row_offsets[i];
 		for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
-			block_column[i].push_back(column[offset]/width);
+			block_column[i].push_back(column_indices[offset]/width);
 			for(int offset_1 = row_offsets[i]; offset_1 < offset; offset_1++){		
-				if((column[offset]/width) == (column[offset_1]/width)){
+				if((column_indices[offset]/width) == (column_indices[offset_1]/width)){
 					block_column[i].pop_back();
 					num_block[i]--;
 				}
