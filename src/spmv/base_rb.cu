@@ -21,18 +21,23 @@
 //
 
 __global__ void spmv_csr_scalar_kernel(const int num_rows, const int * Ap,  const int * Aj,
-		const ValueType * Ax, const ValueType * x, ValueType * y, float ** value, 
+		const ValueType * Ax, const ValueType * x, ValueType * y, float * value, 
 		int * block, int * row_start) {
 
 	int row = blockIdx.x * blockDim.x + threadIdx.x;
 	if(row < num_rows / 2) {
-		int d0 = y[2*row];
-		int d1 = y[2*row+1];
+		float d0 = y[2*row];
+		float d1 = y[2*row+1];
 		for(int j = row_start[row]; j < row_start[row+1]; j ++){
-			d0 += value[j][0]*x[block[j]+0];
-			d0 += value[j][1]*x[block[j]+1];
-			d1 += value[j][2]*x[block[j]+0];
-			d1 += value[j][3]*x[block[j]+1];
+
+			d0 += value[j * 4 + 0]*x[2*block[j]+0];
+			d0 += value[j * 4 + 1]*x[2*block[j]+1];
+			d1 += value[j * 4 + 2]*x[2*block[j]+0];
+			d1 += value[j * 4 + 3]*x[2*block[j]+1];
+	//		d0 += value[j][1]*x[block[j]+1];
+	//		d1 += value[j][2]*x[block[j]+0];
+	//		d1 += value[j][3]*x[block[j]+1];
+		
 		}
 		y[2*row] = d0;	
 		y[2*row+1] = d1;
@@ -164,7 +169,7 @@ __global__ void spmv_csr_scalar_kernel(const int num_rows, const int * Ap,  cons
 
 }
 */
-void SpmvSolver(int num_rows, int nnz, int *h_Ap, int *h_Aj, ValueType *h_Ax, ValueType *h_x, ValueType *h_y, ValueType **h_value, int *h_block, int *h_row_start, int &num_block_all) { 
+void SpmvSolver(int num_rows, int nnz, int *h_Ap, int *h_Aj, ValueType *h_Ax, ValueType *h_x, ValueType *h_y, ValueType *h_value, int *h_block, int *h_row_start, int &num_block_all) { 
 	//print_device_info(0);
 	int *d_Ap, *d_Aj;
 	CUDA_SAFE_CALL(cudaMalloc((void **)&d_Ap, (num_rows + 1) * sizeof(int)));
@@ -178,15 +183,20 @@ void SpmvSolver(int num_rows, int nnz, int *h_Ap, int *h_Aj, ValueType *h_Ax, Va
 	CUDA_SAFE_CALL(cudaMemcpy(d_Ax, h_Ax, nnz * sizeof(ValueType), cudaMemcpyHostToDevice));
 	CUDA_SAFE_CALL(cudaMemcpy(d_x, h_x, num_rows * sizeof(ValueType), cudaMemcpyHostToDevice));
 	CUDA_SAFE_CALL(cudaMemcpy(d_y, h_y, num_rows * sizeof(ValueType), cudaMemcpyHostToDevice));
-	float **d_value;
+	float *d_value;
 	int *d_block, *d_row_start;
-	CUDA_SAFE_CALL(cudaMalloc((void ***)&d_value, num_block_all * 4 * sizeof(float)));
+	CUDA_SAFE_CALL(cudaMalloc((void **)&d_value, num_block_all * 4 * sizeof(float)));
 	CUDA_SAFE_CALL(cudaMalloc((void **)&d_block, num_block_all * sizeof(int)));
 	CUDA_SAFE_CALL(cudaMalloc((void **)&d_row_start, (num_rows / 2 + 1) * sizeof(int)));
 	CUDA_SAFE_CALL(cudaMemcpy(d_value, h_value, num_block_all * 4 * sizeof(float), cudaMemcpyHostToDevice));
 	CUDA_SAFE_CALL(cudaMemcpy(d_block, h_block, num_block_all * sizeof(int), cudaMemcpyHostToDevice));
 	CUDA_SAFE_CALL(cudaMemcpy(d_row_start, h_row_start, (num_rows / 2 + 1) * sizeof(int), cudaMemcpyHostToDevice));
 	
+	for(int j = 0; j < 300; j ++){
+			printf("h_value: %f \n", h_value[j]);
+	}
+
+
 	int nthreads = BLOCK_SIZE;
 	int nblocks = (num_rows - 1) / nthreads + 1;
 	printf("Launching CUDA SpMV solver (%d CTAs, %d threads/CTA) ...\n", nblocks, nthreads);
