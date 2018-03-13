@@ -43,7 +43,6 @@ __global__ void spmv_csr_scalar_kernel(const int num_rows, const int * Ap,  cons
 		y[2*row+1] = d1;
 	}
 
-
 }
 /*
 __global__ void spmv_csr_scalar_kernel(const int num_rows, const int * Ap,  const int * Aj,
@@ -192,7 +191,7 @@ void SpmvSolver(int num_rows, int nnz, int *h_Ap, int *h_Aj, ValueType *h_Ax, Va
 	CUDA_SAFE_CALL(cudaMemcpy(d_block, h_block, num_block_all * sizeof(int), cudaMemcpyHostToDevice));
 	CUDA_SAFE_CALL(cudaMemcpy(d_row_start, h_row_start, (num_rows / 2 + 1) * sizeof(int), cudaMemcpyHostToDevice));
 	
-	for(int j = 0; j < 300; j ++){
+	for(int j = 0; j < 50; j ++){
 			printf("h_value: %f \n", h_value[j]);
 	}
 

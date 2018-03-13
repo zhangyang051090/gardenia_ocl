@@ -141,13 +141,13 @@ printf("going to fill data block2\n");
 	v_row_start.push_back(num_block_all);
 //printf("Error 3 !!\n");
 	for(int i = 0; i < num_rows/height; i ++){
-		num_block[i] = row_offsets[i+height] - row_offsets[i];
+		num_block[i] = row_offsets[2*i+height] - row_offsets[2*i];
 //		printf("num_block_1: %d\n", num_block[i]);
-		for(int offset = row_offsets[i]; offset < row_offsets[i+height]; offset ++){
+		for(int offset = row_offsets[2*i]; offset < row_offsets[2*i+height]; offset ++){
 //printf("Error 4 !!\n");
 			block_column[i].push_back(column_indices[offset]/width);
 //printf("Error 5 !!\n");
-			for(int offset_1 = row_offsets[i]; offset_1 < offset; offset_1++){		
+			for(int offset_1 = row_offsets[2*i]; offset_1 < offset; offset_1++){		
 				if((column_indices[offset]/width) == (column_indices[offset_1]/width)){
 //printf("Error 6 !!\n");
 					block_column[i].pop_back();
@@ -158,6 +158,17 @@ printf("going to fill data block2\n");
 			}
 			
 		}
+
+		//for(int j = 0; j < 26; j ++)
+		//	printf("column: %d\n", column_indices[j]);
+
+		//for(int j = 0; j < 10; j ++)
+		//	printf("block_column: %d\n", block_column[i][j]);
+
+		//printf("num_block: %d\n", num_block[i]);
+
+		//break;
+
 //		printf("num_block_2: %d\n", num_block[i]);
 		num_block_all += num_block[i];
 //printf("Error 8 !!\n");
@@ -175,7 +186,7 @@ printf("going to fill data block2\n");
 				v_block_row.push_back(i);
 		}
 
-		for(int j = 0; j < num_block[i]; j ++)
+//		for(int j = 0; j < num_block[i]; j ++)
 			v_row_start.push_back(num_block_all);	
 		
 		if(v_block.size() != v_block_row.size())printf("Error wrong block row size\n");
@@ -193,10 +204,15 @@ printf("going to fill data block2\n");
 		//block_all.push_back(tmp);
 	}
 
+		for(int j = 0; j < 20; j ++)
+			printf("block_column: %d\n", v_block[j]);
+
+		//column indices of the block (after /2)
 		block = (int *)malloc(v_block.size() * sizeof(int));	
 		for(unsigned int j = 0; j < v_block.size(); j ++)		
 			block[j] = v_block[j];
 
+		//row number of the block (after /2)
 		block_row = (int *)malloc(v_block_row.size() * sizeof(int));
 		for(unsigned int j = 0; j < v_block_row.size(); j ++)		
 			block_row[j] = v_block_row[j];
@@ -216,7 +232,7 @@ printf("num_block_all_1: %d\n", num_block_all);
 	//for(int j = 0; j < 12; j ++){
 	//		printf("column indices: %d \n", column_indices[j]);
 	//}
-	for(int j = 0; j < 4; j ++){
+	for(int j = 0; j < 40; j ++){
 			printf("block: %d \n", block[j]);
 	}
 

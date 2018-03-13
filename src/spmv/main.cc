@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 		h_y[i] = rand() / (RAND_MAX + 1.0);
 		y_host[i] = h_y[i];
 	}
-
+	
 
 	//int value[num_block_all][height*width]={0};
 //	float **value;
@@ -59,18 +59,21 @@ int main(int argc, char *argv[]) {
 		printf("num_block_all: %d\n", num_block_all);
 		printf("value initialization_2\n");
 
-	for(int j = 0; j < 4; j ++){
-		for(int i = 0; i < height*width; i ++){
-			printf("value: %f \n", value[j*4+i]);
-		}
-	}
+//	for(int j = 0; j < 4; j ++){
+//		for(int i = 0; i < height*width; i ++){
+//			printf("value: %f \n", value[j*4+i]);
+//		}
+//	}
 
 		printf("value initialization_3\n");
 
-	for(int j = 0; j < 4; j ++){
+	for(int j = 0; j < 40; j ++){
 			printf("block_row: %d \n", block_row[j]);
 	}
 
+	for(int j = 0; j < 20; j ++){
+			printf("h_column_indices: %d \n", h_column_indices[j]);
+	}
 //	for(int j = 50; j < 55; j ++){
 //			printf("block: %d \n", block[j]);
 //	}
@@ -81,16 +84,16 @@ int main(int argc, char *argv[]) {
 		int i = block_row[j];
 
 			//one_matched = 0;
-			for(int offset = h_row_offsets[i]; offset < h_row_offsets[i+height]; offset ++){		
+			for(int offset = h_row_offsets[2*i]; offset < h_row_offsets[2*i+height]; offset ++){		
 				//if((h_column_indices[offset]/2 == block[j]) && (block_row[j] == i)){
 				if(h_column_indices[offset]/2 == block[j]){
-					if((h_column_indices[offset]%2 == 0) && (offset < h_row_offsets[i+1]))
+					if((h_column_indices[offset]%2 == 0) && (offset < h_row_offsets[2*i+1]))
 						value[4 * j + 0] = h_weight[offset];
-					else if((h_column_indices[offset]%2 == 0) && (offset > h_row_offsets[i+1]))
+					else if((h_column_indices[offset]%2 == 0) && (offset >= h_row_offsets[2*i+1]))
 						value[4 * j + 2] = h_weight[offset];
-					else if((h_column_indices[offset]%2 == 1) && (offset < h_row_offsets[i+1]))
+					else if((h_column_indices[offset]%2 == 1) && (offset < h_row_offsets[2*i+1]))
 						value[4 * j + 1] = h_weight[offset];
-					else if((h_column_indices[offset]%2 == 1) && (offset > h_row_offsets[i+1]))
+					else if((h_column_indices[offset]%2 == 1) && (offset >= h_row_offsets[2*i+1]))
 						value[4 * j + 3] = h_weight[offset];
 						//one_matched ++;
 		//printf("value initialization_3.5\n");
@@ -106,6 +109,11 @@ int main(int argc, char *argv[]) {
 	}
 
 		printf("value initialization_4\n");
+
+	//for(int j = 0; j < 50; j ++){
+	//		printf("value: %f \n", value[j]);
+	//}
+
 
 /*	for(int j = num_block_all-1; j >= 0 ; j --){
 		h_block[j] = *block.end();
