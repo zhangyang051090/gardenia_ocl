@@ -28,16 +28,15 @@ __global__ void spmv_csr_scalar_kernel(const int num_rows, const int * Ap,  cons
 	if(row < num_rows / 2) {
 		float d0 = y[2*row];
 		float d1 = y[2*row+1];
-		for(int j = row_start[row]; j < row_start[row+1]; j ++){
+		int row_begin = row_start[row];
+		int row_end = row_start[row+1];
+		for(int j = row_begin; j < row_end; j ++){
 
 			d0 += value[j * 4 + 0]*x[2*block[j]+0];
 			d0 += value[j * 4 + 1]*x[2*block[j]+1];
 			d1 += value[j * 4 + 2]*x[2*block[j]+0];
 			d1 += value[j * 4 + 3]*x[2*block[j]+1];
-	//		d0 += value[j][1]*x[block[j]+1];
-	//		d1 += value[j][2]*x[block[j]+0];
-	//		d1 += value[j][3]*x[block[j]+1];
-		
+
 		}
 		y[2*row] = d0;	
 		y[2*row+1] = d1;
@@ -191,10 +190,18 @@ void SpmvSolver(int num_rows, int nnz, int *h_Ap, int *h_Aj, ValueType *h_Ax, Va
 	CUDA_SAFE_CALL(cudaMemcpy(d_block, h_block, num_block_all * sizeof(int), cudaMemcpyHostToDevice));
 	CUDA_SAFE_CALL(cudaMemcpy(d_row_start, h_row_start, (num_rows / 2 + 1) * sizeof(int), cudaMemcpyHostToDevice));
 	
-	for(int j = 0; j < 50; j ++){
+	/*for(int j = 0; j < 20; j ++){
 			printf("h_value: %f \n", h_value[j]);
 	}
-
+	for(int j = 0; j < 20; j ++){
+			printf("h_Ax: %f \n", h_Ax[j]);
+	}
+	for(int j = 0; j < 8; j ++){
+			printf("h_x: %f \n", h_x[j]);
+	}
+	for(int j = 0; j < 8; j ++){
+			printf("h_y: %f \n", h_y[j]);
+	}*/
 
 	int nthreads = BLOCK_SIZE;
 	int nblocks = (num_rows - 1) / nthreads + 1;
@@ -202,8 +209,7 @@ void SpmvSolver(int num_rows, int nnz, int *h_Ap, int *h_Aj, ValueType *h_Ax, Va
 
 	Timer t;
 	t.Start();
-	spmv_csr_scalar_kernel <<<nblocks, nthreads>>> (num_rows, d_Ap, d_Aj, d_Ax, d_x, d_y, d_value, d_block, 
-		d_row_start);   
+	spmv_csr_scalar_kernel <<<nblocks, nthreads>>> (num_rows, d_Ap, d_Aj, d_Ax, d_x, d_y, d_value, d_block, d_row_start);   
 	CudaTest("solving failed");
 	CUDA_SAFE_CALL(cudaDeviceSynchronize());
 	t.Stop();

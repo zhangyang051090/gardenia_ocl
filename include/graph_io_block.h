@@ -126,7 +126,10 @@ printf("going to fill data block1\n");
 printf("going to fill data block2\n");
 	//zy second version, not test yet
 	int num_rows = m;
-	int num_block[num_rows/height];
+printf("Error 0 !!\n");
+//	int num_block[num_rows/height];
+	int *num_block = NULL;
+	num_block = (int *)malloc(num_rows/height * sizeof(int));
 //printf("Error 1 !!\n");
 	//vector<int> block_column[num_rows/height];
 	vector<vector<int> > block_column(num_rows/height);
@@ -156,8 +159,9 @@ printf("going to fill data block2\n");
 					break;
 				}
 			}
-			
+//		printf("going to fill data block2.5\n");		
 		}
+
 
 		//for(int j = 0; j < 26; j ++)
 		//	printf("column: %d\n", column_indices[j]);
@@ -235,7 +239,8 @@ printf("num_block_all_1: %d\n", num_block_all);
 	for(int j = 0; j < 40; j ++){
 			printf("block: %d \n", block[j]);
 	}
-
+	
+	free(num_block);
 
 	//zy fist version, not efficient, not test right or wrong
 /*	vector<int> row_offsets_block;

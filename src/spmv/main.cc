@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
 	ValueType *y_host = (ValueType *)malloc(m * sizeof(ValueType));
 	srand(13);
 	for(int i = 0; i < nnz; i++) h_weight[i] = 1.0 - 2.0 * (rand() / (RAND_MAX + 1.0)); // Ax[] (-1 ~ 1)
+
 //	for(int i = 0; i < nnz; i++) h_weight[i] = rand() / (RAND_MAX + 1.0); // Ax[] (0 ~ 1)
 	for(int i = 0; i < num_cols; i++) h_x[i] = rand() / (RAND_MAX + 1.0);
 	for(int i = 0; i < num_rows; i++) {
@@ -136,6 +137,7 @@ int main(int argc, char *argv[]) {
 //		printf("%f ", y_host[i]);
 
 	SpmvSolver(m, nnz, h_row_offsets, h_column_indices, h_weight, h_x, h_y, value, block, row_start, num_block_all);
+	//SpmvSolver(m, nnz, h_row_offsets, h_column_indices, h_weight, h_x, h_y);
 	SpmvVerifier(m, nnz, h_row_offsets, h_column_indices, h_weight, h_x, y_host, h_y);
 	
 	free(h_row_offsets);
